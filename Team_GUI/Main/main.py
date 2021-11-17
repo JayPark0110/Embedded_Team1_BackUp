@@ -13,10 +13,8 @@ from Task import task_email_02
 from Task import run_email
 from Task import task_musicplayer
 from Task import task_news 
-from Task import task_calendar
-from Task import task_game
-
 from Task import task_loading
+from Task import task_calendar
 from Task import tast_weather
 from news_scrap import naver_current_weather, naver_current_weather_Icon # 날씨
 
@@ -39,6 +37,8 @@ class WindowClass(QMainWindow, form_class):
         # 시간 계산
         self.datetime = QDateTime.currentDateTime()
 
+        self.setStyleSheet('background-color:#3e3e3e;') # 테마
+
         # 날씨 아이콘
         wt = naver_current_weather_Icon()
         url = f"https://ssl.pstatic.net/static/weather/image/icon_weather/{wt}.svg"
@@ -47,6 +47,10 @@ class WindowClass(QMainWindow, form_class):
         pixmap.loadFromData(image)
         pixmap = pixmap.scaled(36, 36)
         self.label_icon1.setPixmap(pixmap)
+
+        # 바
+        self.label_bar.setStyleSheet('color: white;background-color:qlineargradient(spread:reflect, x1:1, y1:0, x2:0.995, y2:1, stop:0 rgba(200, 200, 200, 255), stop:0.305419 rgba(40, 40, 40, 255), stop:0.935961 rgba(10, 11, 18, 0), stop:1 rgba(100, 100, 100, 255)); border=0px')        
+        
         
         # 버튼 기능연결, lambda: "TypeError: argument 1 has unexpected type 'NoneType'" 방지하기 위해 사용 
         # 이메일 
@@ -69,19 +73,19 @@ class WindowClass(QMainWindow, form_class):
         
         # 캘린더
         self.btn_run_calendar.clicked.connect(self.openCalendarWindow)
-        
-        # 게임
-        self.btn_run_game.clicked.connect(self.openGameWindow)
-        
+        self.btn_run_calendar.setIcon(QIcon('image_source/cal_1.png'))
+        self.btn_run_calendar.setIconSize(QSize(125,125))
+        self.btn_run_calendar.setStyleSheet('border:0px;')
+
         # 시간 표시 상태바
         self.statusBar().showMessage(self.datetime.toString(Qt.DefaultLocaleShortDate)) 
-        self.statusBar().setStyleSheet('font-size:14pt;')   # 날짜 시간 표시
+        self.statusBar().setStyleSheet('font-size:14pt; color:white;')   # 날짜 시간 표시
 
         # 날씨 버튼
         weather = naver_current_weather()
         self.btn_weather.clicked.connect(self.openWeather)
         self.btn_weather.setText(weather)
-        self.btn_weather.setStyleSheet('font-size:12pt; font:bold; border:0px;')
+        self.btn_weather.setStyleSheet('color:white;font-size:12pt; font:bold; border:0px;')
         
         
     ### 기능함수 ### 
@@ -107,9 +111,6 @@ class WindowClass(QMainWindow, form_class):
     
     def openCalendarWindow(self):
         task_calendar.calendarWindow(self)
-        
-    def openGameWindow(self):
-        task_game.gameWindow(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
