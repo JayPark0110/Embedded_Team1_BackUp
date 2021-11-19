@@ -42,36 +42,71 @@ import dateutil.parser
 
 
 
-def GetEvents_1(): #오늘 날짜부터 이번달 말까지의 이벤트를 배열형태로 리턴해주는 함수
-    Event_List = []
+def GetEvents(month): #0: 11월 ,1: 12월
+    Calender = []
+    Events_List = []
     today = datetime.date.today()
-    #현재 시간
-    now = datetime.datetime(today.year, today.month, today.day, 0, 0, 0).isoformat() + 'z'
-    #이번달의 첫번째 날
-    first_month = datetime.datetime(today.year,today.month,1,)
-    #다음달
-    next_month = first_month + relativedelta.relativedelta(months=1)
-    #이번달의 마지막날
-    last_day = (next_month - datetime.timedelta(seconds=1)).isoformat() + 'z'
+    end_day=0
+    #11월의 첫번째 날
+    November_first = datetime.datetime(today.year,11,1,)
+    #12월의 첫번째 날
+    December_first = datetime.datetime(today.year,12,1,)
+    #1월의 첫번째 날
+    January_first = datetime.datetime(today.year+1,1,1,)
 
+    Time_min = November_first.isoformat() + 'z'
+    Time_max = December_first.isoformat() + 'z'
+
+
+    if month == 0: #11월이라면
+        end_day = 30
+    elif month == 1: #12월이라면
+        end_day = 31
+        Time_min = December_first.isoformat() + 'z'
+        Time_max = January_first.isoformat() + 'z'
+  
+    #다음달의 마지막날
+    #December_last_day = ( December_first - datetime.timedelta(seconds=1)).isoformat() + 'z'
 
     service = build('calendar', 'v3', credentials=creds) #Api에 대한 서비스 객체 생성
     print('Show today s schedule.')
-    events_result = service.events().list(calendarId='primary',singleEvents=True,timeMin=now,timeMax=last_day,maxResults=10,orderBy='startTime').execute()
+
+    #이벤트 추출
+    events_result = service.events().list(calendarId='primary',singleEvents=True,timeMin=Time_min,timeMax=Time_max,maxResults=10,orderBy='startTime').execute()
     events = events_result.get('items')
 
-    if not events:
-        print("Warning From Calender : 가져올 수 있는 이벤트가 없습니다")
+
+    for event in events: #events 1차 정제
+            start = event['start'].get('dateTime',event['start'].get('date'))
+            end = event['end'].get('dateTime',event['end'].get('date'))
+            parsedDate_Start = dateutil.parser.parse(start) #이벤트의 문자열화된 시간정보를 다시 dateTime으로 바꿔준다
+            parsedDate_End = dateutil.parser.parse(end)
+            t = (event['summary'],parsedDate_Start,parsedDate_End)
+            Events_List.append(t)
 
 
-    for event in events:
-        start = event['start'].get('dateTime',event['start'].get('date'))
-        parsedDate = dateutil.parser.parse(start) #이벤트의 문자열화된 시간정보를 다시 dateTime으로 바꿔준다
-        t = (event['summary'],parsedDate)
-        Event_List.append(t)
+    #1일부터 마지막까지 순회
+    for day_i in range(0,end_day+1) :
+        if day_i == 0 :
+            Calender.append('빈 자료형')
+            continue
+
+        Day_list = []
+        Event_list = []
+        events_count = 0
+
+        for event in Events_List:
+            if day_i == event[1].day:
+                Event_list.append(event)
+                events_count += 1
+
+        Day_list.append(events_count)
+        for event in Event_list:
+            Day_list.append(event)
         
-    return Event_List
+        
+        Calender.append(Day_list)
 
-
-print(GetEvents_1())
-
+    
+        
+    return Calender

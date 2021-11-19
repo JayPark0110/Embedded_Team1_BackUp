@@ -16,7 +16,9 @@ class calendarWindow(QDialog):
         self.show()
         
         # 캘린더 데이터 받아옴
-        self.data = Calender.GetEvents_1()
+        self.data = Calender.GetEvents(0) # (17,1,0: "테스트 11.17")
+        # 스타트 타임 - (17,1,1).hour // (17,1,1).minute
+        # 엔드 타임 (17,1,2).hour // (17,1,2).minute
         
         # 데이터 관리 변수
         self.current_row = 0
@@ -55,6 +57,7 @@ class calendarWindow(QDialog):
     def calendarClicked(self):
         self.selected_date = self.calendarWidget.selectedDate() # QDate 타입으로 저장
         print(self.selected_date)
+        print(self.selected_date[2]) # 날짜 확인 
         self.label_selectedDate.setText(self.selected_date.toString()) # QDate 타입 -> String 타입 캐스팅
         
     
@@ -70,7 +73,10 @@ class calendarWindow(QDialog):
 
     def loadSchedule(self):
         print(f"받아온 데이터 확인 {self.data}")
-
+        start_time = str(self.data[17][1][1].hour) + "시" + str(self.data[17][1][1].minute) + "분"
+        print(start_time)
+        end_time = str(self.data[17][1][2].hour) + "시" + str(self.data[17][1][2].minute) + "분"
+        print(end_time)
 
     #버튼에 연결된 함수들
     # def loadScheduleFunction(self):
