@@ -4,6 +4,10 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QApplication
 from PyQt5.QtGui import *
+# 게임 소스
+from game_source import brick_break_game
+from game_source import tetris_game
+from game_source import snake_game
 
 
 class gameWindow(QDialog):
@@ -27,9 +31,9 @@ class gameWindow(QDialog):
         #     "image_source/song_defalut_cover.png", 200))
 
         # 게임 플레이 버튼, lambda: "TypeError: argument 1 has unexpected type 'NoneType'" 방지하기 위해 사용 
-        self.btn_game1.clicked.connect(lambda: self.playGame(0))
-        self.btn_game2.clicked.connect(lambda: self.playGame(0))
-        self.btn_game3.clicked.connect(lambda: self.playGame(0))
+        self.btn_game1.clicked.connect(lambda: self.playGame(0)) # brick game
+        self.btn_game2.clicked.connect(lambda: self.playGame(1)) # tetris
+        self.btn_game3.clicked.connect(lambda: self.playGame(2)) # snake
 
         # Back: Close Window
         self.btn_back.clicked.connect(self.backToMainWindow)
@@ -46,8 +50,12 @@ class gameWindow(QDialog):
 
     # 게임 실행 버튼
     def playGame(self, source_list_idx):
-        # game = source_list[0]
-        # 게임 실행
+        if source_list_idx == 0:
+            brick_break_game.main()
+        elif source_list_idx == 1:
+            tetris_game.main()
+        elif source_list_idx == 2:
+            snake_game.main()
         print("playig 게임 이름...")
 
     # 현재 dialog 창 종료

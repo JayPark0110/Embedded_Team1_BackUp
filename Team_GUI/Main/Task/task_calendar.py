@@ -20,8 +20,6 @@ class calendarWindow(QDialog):
         # (17,1,0: "테스트 11.17") # 현재 자동으로 받아온 상태
         self.data = Calender.GetEvents(0)        
         print(f"현재데이터: {self.data}")
-        # 스타트 타임 - (17,1,1).hour // (17,1,1).minute
-        # 엔드 타임 (17,1,2).hour // (17,1,2).minute
 
         # 데이터 관리 변수
         self.current_row = 0
@@ -99,18 +97,6 @@ class calendarWindow(QDialog):
         self.month = str(self.calendarWidget.monthShown()) + "월"
         print(self.year, self.month)
 
-    #버튼에 연결된 함수들
-    # def loadScheduleFunction(self):
-    #     # 최대 3개 페이지까지 구성, 한 페이지당 스케쥴 목록 8개
-    #     if (self.current_row + 8) <= (self.num_to_load):
-    #         print("loading schdule...")
-    #         for i in range(0, 100):  # 1개의 행을 만들고, 데이터를 각각 입력, 100번 반복
-    #             self.tableWidget.setRowCount(i + 1)
-    #             self.tableWidget.setItem(i, 0, QtWidgets.QTableWidgetItem(f"{i + 1}, 0")) # 도착시각 (Nov 11, 12:30)
-    #             self.tableWidget.setItem(i, 1, QtWidgets.QTableWidgetItem(f"{i + 1}, 0")) # 보낸 사람
-    #             self.tableWidget.setItem(i, 2, QtWidgets.QTableWidgetItem(f"{i + 1}, 0")) # 제목
-    #         print(f"schedule loaded. current row : {self.current_row}")
-
     def loadPrevMonth(self):
         if self.month == 12: # 12월의 날짜를 클릭한 상태에서 이전 달 버튼을 누르면
             self.month = 11
@@ -134,7 +120,6 @@ class calendarWindow(QDialog):
         self.calendarWidget.showToday()
 
     # 현재 dialog 창 종료
-
     def backToMainWindow(self):
         self.close()
         print("close dialog...")
