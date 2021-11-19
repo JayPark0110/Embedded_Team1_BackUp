@@ -34,9 +34,16 @@ def naver_weather():
   # print(find_currenttemp+'C')
 
   data2 = data1.findAll('dd')
-  find_hum = data2[0].text
-  find_wind = data2[1].text
-  find_sens = data2[2].text
+  if(len(data2)==3):
+    find_rain = '0%'
+    find_hum = data2[0].text
+    find_wind = data2[1].text
+    find_sens = data2[2].text
+  else:
+    find_rain = data2[0].text
+    find_hum = data2[1].text
+    find_wind = data2[2].text
+    find_sens = data2[3].text
   
   # print("습도 :",find_hum)
   # print("바람 :",find_wind)
@@ -52,7 +59,7 @@ def naver_weather():
   # print('현재 초미세먼지: '+find_ultra)
   # print('현재 자외선: '+find_uv)
 
-  text = ('현재 날씨\n' + find_currenttemp+'C\n' + '습도 : ' + find_hum + "\n바람 : " + find_wind +"\n체감온도 : " + find_sens+'C' + '\n현재 미세먼지 : '+ find_dust + '\n현재 초미세먼지 : '+ find_ultra + '\n현재 자외선 : '+ find_uv)
+  text = ('현재 날씨\n' + find_currenttemp+'C\n' + '강수확률 : ' + find_rain + '\n습도 : ' + find_hum + "\n바람 : " + find_wind +"\n체감온도 : " + find_sens+'C' + '\n현재 미세먼지 : '+ find_dust + '\n현재 초미세먼지 : '+ find_ultra + '\n현재 자외선 : '+ find_uv)
 
   return text
   

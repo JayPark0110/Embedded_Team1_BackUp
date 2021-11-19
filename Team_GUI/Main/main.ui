@@ -14,52 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btn_run_email">
+   <widget class="QPushButton" name="btn_weather">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>40</y>
-      <width>140</width>
-      <height>140</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_run_musicplayer">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>40</y>
-      <width>140</width>
-      <height>140</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_run_news">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>40</y>
-      <width>140</width>
-      <height>140</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_weather">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>131</width>
-      <height>41</height>
+      <width>141</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="text">
@@ -69,23 +30,10 @@
    <widget class="QLabel" name="label_icon1">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>320</y>
-      <width>36</width>
-      <height>36</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_run_calendar">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>190</y>
-      <width>140</width>
-      <height>140</height>
+      <x>70</x>
+      <y>50</y>
+      <width>100</width>
+      <height>100</height>
      </rect>
     </property>
     <property name="text">
@@ -108,19 +56,71 @@
      </font>
     </property>
     <property name="text">
-     <string>   Team_1</string>
+     <string>   MiPi</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_run_game">
+   <widget class="QPushButton" name="btn_run_email">
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>190</y>
-      <width>140</width>
-      <height>140</height>
+      <y>40</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_run_musicplayer">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>40</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_run_news">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>200</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_run_calendar">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>200</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_run_game">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>200</y>
+      <width>141</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="text">
